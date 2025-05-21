@@ -1,15 +1,19 @@
 #Fonction qui retourne un fichier fonction du choix de l'utilisateur
 def choisir_fichier (reponse) :
+    #Si l'utilisateur veut utiliser son fichier
     if reponse == 'oui' :
         print ('Suivre instruction README pour ajouter votre fichier')
         fichier = input ('Donner nom du fichier, sous format nom.txt :')
+    #Par defaut choix du fichier mots_pendu
     else :
         fichier ='mots_pendu.txt'
     return fichier
 
 #Fonction qui selectionne un mot aléatoire dans un fichier txt
 def selectionner_mot (fichier_txt):
+    #importation bibliothèque random
     import random
+    #ouverture et lecture du fichier et retour d'un mot aléatoire normalise
     with open(fichier_txt, "r") as fichier:
         liste_mots = [ligne.strip().lower() for ligne in fichier.readlines()]
         mot = random.choice(liste_mots)
@@ -18,17 +22,19 @@ def selectionner_mot (fichier_txt):
 
 #Fonction qui enlève les caractères speciaux present dans un mot
 def enlever_caracteres_speciaux(mot):
+    #importation bibliothèque unicodedata
     import unicodedata
     normalized_word = unicodedata.normalize('NFKD',mot)
     return ''.join([char for char in normalized_word \
                     if not unicodedata.combining(char)])
 
-#Fonction qui renvoie une lettre indice, non presente dans mot
-def trouver_indice (mot) :
+#Fonction qui renvoie une indice, non testee et non presente dans mot
+def trouver_indice (mot,lettre_testee) :
     import string
     import random
     alphabet = string.ascii_lowercase
-    indice = [lettre for lettre in alphabet if lettre not in mot]
+    pas_indice = list(mot) + lettre_testee
+    indice = [lettre for lettre in alphabet if lettre not in pas_indice]
     return random.choice(indice)
 
 #Fonction pour jouer au pendu à partir d'un fichier de mots
@@ -40,18 +46,18 @@ def jouer_pendu (fichier) :
     print(f'Mot à deviner : {mot_cache}')
 
     chance = 6
-    lettre_teste = []
+    lettre_testee = []
 
     while chance > 0 :
         lettre = input (f'Essayer la lettre (tu as {chance} chance(s)) :').lower()
         lettre = enlever_caracteres_speciaux(lettre)
 
         #Verifier que la lettre n'a pas deja été joué
-        if lettre in lettre_teste :
+        if lettre in lettre_testee :
             print ('Lettre deja testée')
             continue
         else :
-            lettre_teste += [lettre]
+            lettre_testee += [lettre]
 
         #Ajouter la lettre lorsqu'elle est dans le mot
         trouve = False
@@ -71,7 +77,7 @@ def jouer_pendu (fichier) :
             print ("-> La lettre n'est pas dans le mot")
             #Bonus donner un indice pour la dernière chance
             if chance == 1 :
-                lettre_indice = trouver_indice(mot)
+                lettre_indice = trouver_indice(mot,lettre_testee)
                 print (f"Indice : {lettre_indice} n'est pas dans le mot")
 
     if mot_cache == mot :
