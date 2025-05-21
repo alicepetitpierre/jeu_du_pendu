@@ -10,12 +10,13 @@ print ('- JEU DU PENDU -')
 from module_fonctions import choisir_fichier, jouer_pendu
 
 print ()
-
+#Continuer la boucle tant que l'on joue
 while True :
     #Demander si l'utilisateur veux jouer avec son fichier ou non
     reponse = ""
     while reponse not in ["oui","non"]:
-        reponse = input ('Veux-tu jouer avec ton propre fichier de mot ? (oui/non) :').strip().lower()
+        reponse = input ('Veux-tu jouer avec ton propre fichier de mot ? '
+                         '(oui/non) :').strip().lower()
         if reponse not in ["oui","non"]:
             print('Réponse invalide')
 

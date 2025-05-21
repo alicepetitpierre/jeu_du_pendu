@@ -1,4 +1,4 @@
-
+#Fonction qui retourne un fichier fonction du choix de l'utilisateur
 def choisir_fichier (reponse) :
     if reponse == 'oui' :
         print ('Suivre instruction README pour ajouter votre fichier')
@@ -7,6 +7,7 @@ def choisir_fichier (reponse) :
         fichier ='mots_pendu.txt'
     return fichier
 
+#Fonction qui selectionne un mot aléatoire dans un fichier txt
 def selectionner_mot (fichier_txt):
     import random
     with open(fichier_txt, "r") as fichier:
@@ -15,11 +16,14 @@ def selectionner_mot (fichier_txt):
         mot_normalise = enlever_caracteres_speciaux(mot)
     return mot_normalise
 
+#Fonction qui enlève les caractères speciaux present dans un mot
 def enlever_caracteres_speciaux(mot):
     import unicodedata
     normalized_word = unicodedata.normalize('NFKD',mot)
-    return ''.join([char for char in normalized_word if not unicodedata.combining(char)])
+    return ''.join([char for char in normalized_word \
+                    if not unicodedata.combining(char)])
 
+#Fonction qui renvoie une lettre indice, non presente dans mot
 def trouver_indice (mot) :
     import string
     import random
@@ -27,6 +31,7 @@ def trouver_indice (mot) :
     indice = [lettre for lettre in alphabet if lettre not in mot]
     return random.choice(indice)
 
+#Fonction pour jouer au pendu à partir d'un fichier de mots
 def jouer_pendu (fichier) :
 
     mot = selectionner_mot(fichier)
