@@ -22,16 +22,16 @@ def enlever_caracteres_speciaux(mot):
 
 def trouver_indice (mot) :
     import string
+    import random
     alphabet = string.ascii_lowercase
     indice = [lettre for lettre in alphabet if lettre not in mot]
-    return indice
-
+    return random.choice(indice)
 
 def jouer_pendu (fichier) :
 
     mot = selectionner_mot(fichier)
 
-    mot_cache = '_'*len(mot)
+    mot_cache = '_' * len(mot)
     print(f'Mot à deviner : {mot_cache}')
 
     chance = 6
