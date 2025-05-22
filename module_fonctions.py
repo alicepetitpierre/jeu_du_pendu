@@ -1,9 +1,11 @@
+#Module avec les fonctions pour le jeu du pendu
+
 #Fonction qui retourne un fichier fonction du choix de l'utilisateur
 def choisir_fichier (reponse) :
     #Si l'utilisateur veut utiliser son fichier
     if reponse == 'oui' :
-        print ('Suivre instruction README pour ajouter votre fichier')
-        fichier = input ('Donner nom du fichier, sous format nom.txt :')
+        print ('Suivre instruction README pour ajouter votre fichier au dossier')
+        fichier = input ('Donner le nom du fichier, sous format nom.txt :')
     #Par defaut choix du fichier mots_pendu
     else :
         fichier ='mots_pendu.txt'
@@ -11,13 +13,20 @@ def choisir_fichier (reponse) :
 
 #Fonction qui selectionne un mot aléatoire dans un fichier txt
 def selectionner_mot (fichier_txt):
-    #importation bibliothèque random
+    #importer bibliothèque
     import random
-    #ouverture et lecture du fichier et retour d'un mot aléatoire normalise
-    with open(fichier_txt, "r") as fichier:
-        liste_mots = [ligne.strip().lower() for ligne in fichier.readlines()]
-        mot = random.choice(liste_mots)
-        mot_normalise = enlever_caracteres_speciaux(mot)
+    #ouverture et lecture du fichier et selectionner un mot aléatoire
+    with open(fichier_txt, "r", encoding='utf8') as f:
+        #lire le contenu du fichier
+        mots = f.readlines()
+    #enlever retour à la ligne
+    liste_mots = []
+    for ligne in mots:
+        mot = ligne.replace('\n', '').lower()
+        liste_mots.append(mot)
+    #selectionner un mot aléatoire dans la liste
+    mot = random.choice(liste_mots)
+    mot_normalise = enlever_caracteres_speciaux(mot)
     return mot_normalise
 
 #Fonction qui enlève les caractères speciaux present dans un mot
@@ -30,24 +39,31 @@ def enlever_caracteres_speciaux(mot):
 
 #Fonction qui renvoie une indice, non testee et non presente dans mot
 def trouver_indice (mot,lettre_testee) :
+    #importer bibliothèques
     import string
     import random
     alphabet = string.ascii_lowercase
-    pas_indice = list(mot) + lettre_testee
-    indice = [lettre for lettre in alphabet if lettre not in pas_indice]
+    #creer la liste des lettres qui ne peuvent pas etre un indice
+    non_indice = list(mot) + lettre_testee
+    indice = []
+    #creer la liste des lettres qui peuvent etre un indice
+    for lettre in alphabet :
+        if lettre not in non_indice :
+            indice.append(lettre)
+    #selectionner une lettre dans la liste
     return random.choice(indice)
 
 #Fonction pour jouer au pendu à partir d'un fichier de mots
 def jouer_pendu (fichier) :
-
+    #selectionner un mot et le cacher
     mot = selectionner_mot(fichier)
-
     mot_cache = '_' * len(mot)
+    #afficher l'etat du mot cache
     print(f'Mot à deviner : {mot_cache}')
-
+    #initialiser le nombre de chance
     chance = 6
     lettre_testee = []
-
+    #boucler tant qu'il reste une chance
     while chance > 0 :
         lettre = input (f'Essayer la lettre (tu as {chance} chance(s)) :').lower()
         lettre = enlever_caracteres_speciaux(lettre)
@@ -59,17 +75,19 @@ def jouer_pendu (fichier) :
         else :
             lettre_testee += [lettre]
 
-        #Ajouter la lettre lorsqu'elle est dans le mot
+        #initialisation
         trouve = False
+        #tester si la lettre est dans le mot
         for i in range(len(mot)):
             if lettre == mot[i]:
-                mot_cache = mot_cache[:i]+lettre+mot_cache[i+1:]
+                #modifier le mot caché
+                mot_cache = mot_cache[:i] + lettre + mot_cache[i+1:]
                 trouve = True
 
-        #Sortie de la boucle si le mot est trouvé en entier avant la fin des 6 chances
+        #Sortir de la boucle si le mot est trouvé en entier
         if mot_cache == mot :
             break
-        elif trouve :
+        elif trouve:
             print(mot_cache)
         else :
             chance -= 1
@@ -84,5 +102,4 @@ def jouer_pendu (fichier) :
         print ('Gagné, tu as trouvé le mot !!')
     if chance == 0 :
         print ('Perdu, tu as epuisé tes chances...')
-
     return mot
