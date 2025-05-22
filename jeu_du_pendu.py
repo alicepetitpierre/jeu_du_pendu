@@ -8,28 +8,29 @@
 print('- JEU DU PENDU -')
 print()
 from module_fonctions import choisir_fichier, jouer_pendu
+
 #Initialiser la condition
 jouer = True
 #Boucle tant que l'utilisateur veut jouer
-while jouer :
+while jouer:
     #Initialisater la condition
     correct = False
     reponse = ""
     #Boucler tant que la réponse n'est pas dans le bon format
-    while not correct :
+    while not correct:
         #Demander si l'utilisateur veut jouer avec son fichier ou non
         #Solution obtenue sur https://stackoverflow.com/questions/44986793/remove-spaces-in-every-where-in-the-string-python
-        reponse = input ('Veux-tu jouer avec ton propre fichier de mot ? '
+        reponse = input('Veux-tu jouer avec ton propre fichier de mot ? '
                          '(oui/non) :').strip().lower()
-        if reponse not in ["oui","non"]:
+        if reponse not in ["oui", "non"]:
             print('Réponse invalide')
-        else :
+        else:
             correct = True
 
     #Lancer le jeu
-    fichier = choisir_fichier (reponse)
-    resultat = jouer_pendu (fichier)
-    print (f'La réponse était {resultat}')
+    fichier = choisir_fichier(reponse)
+    resultat = jouer_pendu(fichier)
+    print(f'La réponse était {resultat}')
 
     #Demander si l'utilisateur veut faire une nouvelle partie
     correct = False
@@ -45,5 +46,5 @@ while jouer :
 
     if nouvelle_partie == 'oui':
         continue
-    else :
+    else:
         jouer = False

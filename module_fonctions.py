@@ -1,18 +1,19 @@
-#Module avec les fonctions définies appelées par le script principal
+#Module avec les fonctions définies et appelées par le script principal
 
 #Fonction qui retourne un fichier fonction du choix de l'utilisateur
-def choisir_fichier (reponse) :
+def choisir_fichier(reponse):
     #Si l'utilisateur veut utiliser son fichier
-    if reponse == 'oui' :
-        print ('Suivre instruction README')
-        fichier = input ('Donner le nom du fichier, sous format nom.txt :')
+    if reponse == 'oui':
+        print('Suivre instruction README')
+        fichier = input('Donner le nom du fichier, sous format nom.txt :')
     #Par defaut choix du fichier mots_pendu
-    else :
-        fichier ='mots_pendu.txt'
+    else:
+        fichier = 'mots_pendu.txt'
     return fichier
 
+
 #Fonction qui selectionne un mot aléatoire dans un fichier txt
-def selectionner_mot (fichier_txt):
+def selectionner_mot(fichier_txt):
     #importer bibliothèque
     import random
     #ouverture et lecture du fichier et selectionner un mot aléatoire
@@ -29,16 +30,18 @@ def selectionner_mot (fichier_txt):
     mot_normalise = enlever_caracteres_speciaux(mot)
     return mot_normalise
 
+
 #Fonction qui enlève les caractères speciaux present dans un mot
 def enlever_caracteres_speciaux(mot):
     #importation bibliothèque unicodedata
     import unicodedata
-    mot_normalise = unicodedata.normalize('NFKD',mot)
+    mot_normalise = unicodedata.normalize('NFKD', mot)
     return ''.join([char for char in mot_normalise \
                     if not unicodedata.combining(char)])
 
+
 #Fonction qui renvoie une indice, non testee et non presente dans mot
-def trouver_indice (mot,lettre_testee) :
+def trouver_indice(mot, lettre_testee):
     #importer bibliothèques
     import string
     import random
@@ -47,14 +50,15 @@ def trouver_indice (mot,lettre_testee) :
     non_indice = list(mot) + lettre_testee
     indice = []
     #creer la liste des lettres qui peuvent etre un indice
-    for lettre in alphabet :
-        if lettre not in non_indice :
+    for lettre in alphabet:
+        if lettre not in non_indice:
             indice.append(lettre)
     #selectionner une lettre dans la liste
     return random.choice(indice)
 
+
 #Fonction pour jouer au pendu à partir d'un fichier de mots
-def jouer_pendu (fichier) :
+def jouer_pendu(fichier):
     #selectionner un mot et le cacher
     mot = selectionner_mot(fichier)
     mot_cache = '_' * len(mot)
@@ -64,15 +68,15 @@ def jouer_pendu (fichier) :
     chance = 6
     lettre_testee = []
     #boucler tant qu'il reste une chance
-    while chance > 0 :
-        lettre = input (f'Essayer la lettre (tu as {chance} chance(s)) :').lower()
+    while chance > 0:
+        lettre = input(f'Essayer la lettre (tu as {chance} chance(s)) :').lower()
         lettre = enlever_caracteres_speciaux(lettre)
 
         #Verifier que la lettre n'a pas deja été joué
-        if lettre in lettre_testee :
-            print ('Lettre deja testée')
+        if lettre in lettre_testee:
+            print('Lettre deja testée')
             continue
-        else :
+        else:
             lettre_testee += [lettre]
 
         #initialisation
@@ -85,21 +89,21 @@ def jouer_pendu (fichier) :
                 trouve = True
 
         #Sortir de la boucle si le mot est trouvé en entier
-        if mot_cache == mot :
+        if mot_cache == mot:
             break
         elif trouve:
             print(mot_cache)
-        else :
+        else:
             chance -= 1
             print(mot_cache)
-            print ("-> La lettre n'est pas dans le mot")
+            print("-> La lettre n'est pas dans le mot")
             #Bonus donner un indice pour la dernière chance
-            if chance == 1 :
+            if chance == 1:
                 lettre_indice = trouver_indice(mot,lettre_testee)
-                print (f"Indice : {lettre_indice} n'est pas dans le mot")
+                print(f"Indice : {lettre_indice} n'est pas dans le mot")
 
-    if mot_cache == mot :
-        print ('Gagné, tu as trouvé le mot !!')
-    if chance == 0 :
-        print ('Perdu, tu as epuisé tes chances...')
+    if mot_cache == mot:
+        print('Gagné, tu as trouvé le mot !!')
+    if chance == 0:
+        print('Perdu, tu as epuisé tes chances...')
     return mot
