@@ -11,7 +11,8 @@ ___
 - L'indice est une lettre qui n'est pas présente dans le mot
 ## Fichier dans lequel sélectionner le mot :
 ### 1. Fichier personnel 
-Placer le fichier personnel, sous format .txt, dans le même dossier que les fichiers du dépot.
+- Glisser et deposer le fichier personnel dans le dossier jeu_du_pendu situé dans l'explorateur de fichier à gauche
+- Le fichier doit être dans le format fichier.txt
 ### 2. Fichier par défaut 
 Un fichier est fournis par défaut si aucun fichier personnel n'est fournis.
 ## Lancer le jeu :
