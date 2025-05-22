@@ -1,11 +1,13 @@
 # Jeu du pendu
-## Règles du jeu 
-- Trouver le mot
-- Tester des lettres 
+___
+*But du jeu : Trouver le mot*
+___
+## Règles du jeu
+- Entrer et tester des lettres 
 - Il y a 6 chances pour trouver le bon mot
-- Lorsque qu'il ne reste que 1 chance, si le mot n'est pas trouvé, un indice sera fournis
-## Choix du fichier où extraire les mots 
+- Lorsque qu'il ne reste que 1 chance un indice est fournis
+## Choix du fichier dans lequel sélectionner un mot 
 ### Fichier personnel 
-Place ton fichier personnel sous format txt dans le meme dossier que les fichiers du dépot
+Placer le fichier personnel, sous format txt, dans le même dossier que les fichiers du dépot.
 ### Fichier par défaut 
-Un fichier est fournis par defaut si tu n'as pas de fichier à fournir
+Un fichier est fournis par défaut si aucun fichier personnel n'est fournis.

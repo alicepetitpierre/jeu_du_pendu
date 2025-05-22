@@ -4,7 +4,7 @@
 def choisir_fichier (reponse) :
     #Si l'utilisateur veut utiliser son fichier
     if reponse == 'oui' :
-        print ('Suivre instruction README pour ajouter votre fichier au dossier')
+        print ('Suivre instruction README')
         fichier = input ('Donner le nom du fichier, sous format nom.txt :')
     #Par defaut choix du fichier mots_pendu
     else :
@@ -33,8 +33,8 @@ def selectionner_mot (fichier_txt):
 def enlever_caracteres_speciaux(mot):
     #importation bibliothèque unicodedata
     import unicodedata
-    normalized_word = unicodedata.normalize('NFKD',mot)
-    return ''.join([char for char in normalized_word \
+    mot_normalise = unicodedata.normalize('NFKD',mot)
+    return ''.join([char for char in mot_normalise \
                     if not unicodedata.combining(char)])
 
 #Fonction qui renvoie une indice, non testee et non presente dans mot
@@ -60,7 +60,7 @@ def jouer_pendu (fichier) :
     mot_cache = '_' * len(mot)
     #afficher l'etat du mot cache
     print(f'Mot à deviner : {mot_cache}')
-    #initialiser le nombre de chance
+    #initialiser le nombre de chances
     chance = 6
     lettre_testee = []
     #boucler tant qu'il reste une chance

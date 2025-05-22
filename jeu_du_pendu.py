@@ -1,7 +1,7 @@
 #Script principal du jeu du pendu
 #Un mot est selectionné de facon aléatoire dans un fichier texte
-#L'utilisateur à 6 chances pour trouver toutes les lettres
-#Apres avoir gangé ou perdu, l'utilisateur peut rejouter
+#L'utilisateur a 6 chances pour trouver toutes les lettres
+#Apres avoir gangé ou perdu, l'utilisateur peut rejouer
 
 print('- JEU DU PENDU -')
 print()
@@ -26,9 +26,9 @@ while jouer :
     #Lancer le jeu
     fichier = choisir_fichier (reponse)
     resultat = jouer_pendu (fichier)
-    print (f'La réponse etait {resultat}')
+    print (f'La réponse était {resultat}')
 
-    #Demander si l'utilisateur veux faire une nouvelle partie
+    #Demander si l'utilisateur veut faire une nouvelle partie
     correct = False
     nouvelle_partie = ""
     # Boucler tant que la réponse n'est pas dans le bon format
