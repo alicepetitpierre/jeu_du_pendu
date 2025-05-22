@@ -1,7 +1,9 @@
-#Script principal du jeu du pendu
-#Un mot est selectionné de facon aléatoire dans un fichier texte
-#L'utilisateur a 6 chances pour trouver toutes les lettres
-#Apres avoir gangé ou perdu, l'utilisateur peut rejouer
+#Script principal
+#Ce script permet de jouer au jeu du pendu
+#Un mot est sélectionné de facon aléatoire dans un fichier texte
+#L'utilisateur a 6 chances pour trouver le mot
+#Une fois les 6 chances passées l'utilisateur a perdu
+#Après avoir gagné ou perdu, l'utilisateur peut rejouer
 
 print('- JEU DU PENDU -')
 print()
@@ -16,6 +18,7 @@ while jouer :
     #Boucler tant que la réponse n'est pas dans le bon format
     while not correct :
         #Demander si l'utilisateur veut jouer avec son fichier ou non
+        #Solution obtenue sur https://stackoverflow.com/questions/44986793/remove-spaces-in-every-where-in-the-string-python
         reponse = input ('Veux-tu jouer avec ton propre fichier de mot ? '
                          '(oui/non) :').strip().lower()
         if reponse not in ["oui","non"]:

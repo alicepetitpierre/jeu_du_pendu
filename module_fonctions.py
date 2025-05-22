@@ -1,4 +1,4 @@
-#Module avec les fonctions pour le jeu du pendu
+#Module avec les fonctions définies appelées par le script principal
 
 #Fonction qui retourne un fichier fonction du choix de l'utilisateur
 def choisir_fichier (reponse) :
